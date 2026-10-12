@@ -1,12 +1,19 @@
 {
   "name": "francofadini",
   "description": "Plugins de Claude Code de Franco, reutilizables entre proyectos",
-  "owner": { "name": "Franco Fadini" },
+  "owner": {
+    "name": "Franco Fadini"
+  },
   "plugins": [
     {
       "name": "secrets",
       "source": "./plugins/secrets",
       "description": "Secretos con dotenvx: el agente los usa y los escribe sin leerlos nunca; hooks que bloquean exponerlos en el chat"
+    },
+    {
+      "name": "idea2spec",
+      "source": "./plugins/idea2spec",
+      "description": "From an app idea to an approved shape with sketches and a spec/ ready for an AI to build it. For non-technical people."
     }
   ]
 }

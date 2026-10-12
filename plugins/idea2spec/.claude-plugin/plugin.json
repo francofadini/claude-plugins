@@ -1,0 +1,9 @@
+{
+  "name": "idea2spec",
+  "displayName": "idea2spec",
+  "version": "0.1.0",
+  "description": "From an app idea to a shape document with sketches the person approves, plus a spec/ folder ready for an AI to build the app. Built for non-technical people: few questions, the system brings the design judgment.",
+  "author": {
+    "name": "Franco Fadini"
+  }
+}

@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[App name] · Pick one: [what is being decided]</title>
+<!--
+  OPTIONS CHECKPOINT TEMPLATE
+  ======================================================================
+  What it is: a one-screen page where a NON-technical person picks between 2–3 options.
+  Used whenever a decision is theirs (structure, a screen layout, a brand direction, a name).
+
+  Files that must sit in the same folder: ios-kit.css, doc.css, annotate.js.
+
+  Rules:
+  - 2 or 3 options, never more. Side by side on desktop, stacked on a phone.
+  - Each option = letter + short name + ONE phone + 2 lines of "why" in plain words (what you gain, what you give up).
+  - Exactly one option is marked recommended (.option.recommended + the badge), and the
+    "how to choose" box says why in one line.
+  - Same screen, same example data, same copy in every option: ONLY the thing being decided changes.
+    Otherwise the person compares noise.
+  - No jargon in the visible text ("panel that slides up", not "sheet"; "the bar at the bottom", not "tab bar").
+  - The question in the title is the one the person answers. Nothing else is asked on this page.
+  - Each phone: data-screen="Option A · [name]" so annotations say which option they refer to.
+  ======================================================================
+-->
+<link rel="stylesheet" href="ios-kit.css">
+<link rel="stylesheet" href="doc.css">
+<style>
+  /* PROJECT BRAND: same overrides as the other documents (variables only). Usually none before the brand stage. */
+  .doc{ max-width:1180px; }
+</style>
+</head>
+<body>
+<main class="doc">
+
+<header class="chapter" style="margin-top:12px" data-section="Question">
+  <p class="kicker">[App name] · to decide</p>
+  <!-- THE QUESTION: one line, in the person's words. -->
+  <h2>[Which one feels right for X?]</h2>
+  <!-- CONTEXT: 1–2 lines. What stays the same in every option and what changes. -->
+  <p class="intro">All three show the same screen with the same example; only [the thing being decided] changes.</p>
+</header>
+
+<section class="options" data-section="Options">
+
+  <!-- OPTION A -->
+  <article class="option" id="opt-a">
+    <span class="letter">A</span>
+    <h3>[Short name A]</h3>
+    <p class="why">[What you gain, in one line.] [What you give up, in one line.]</p>
+    <figure class="shot" id="ph-opt-a" data-screen="Option A · [name]">
+      <div class="ios-phone grouped">
+        <div class="ios-status"><span>9:41</span><span class="r"><i class="bars"></i><i class="batt"></i></span></div>
+        <div class="ios-island"></div>
+        <div class="ios-edge"></div>
+        <div class="ios-nav"><div class="right"><span class="ios-btn circle ios-glass"><span class="ios-ico">+</span></span></div></div>
+        <div class="ios-scroll below-nav has-tabbar">
+          <div class="ios-largetitle"><h1>[Title]</h1></div>
+          <div class="ios-section-h">[Section]</div>
+          <div class="ios-list">
+            <div class="ios-row icon"><span class="ios-thumb"></span><div class="t"><b class="hl">[Item]</b><i>[Detail]</i></div><span class="chev"></span></div>
+            <div class="ios-row icon"><span class="ios-thumb"></span><div class="t"><b class="hl">[Item]</b><i>[Detail]</i></div><span class="chev"></span></div>
+          </div>
+        </div>
+        <div class="ios-tabwrap"><div class="ios-tabrow"><div class="ios-tabbar ios-glass"><span class="ios-tab on"><span class="g">◼︎</span>[Tab 1]</span><span class="ios-tab"><span class="g">◎</span>[Tab 2]</span><span class="ios-tab"><span class="g">◇</span>[Tab 3]</span></div></div></div>
+        <div class="ios-home"></div>
+      </div>
+    </figure>
+  </article>
+
+  <!-- OPTION B (recommended): class "recommended" + the badge. Only ONE option gets it. -->
+  <article class="option recommended" id="opt-b">
+    <span class="badge">Recommended</span>
+    <span class="letter">B</span>
+    <h3>[Short name B]</h3>
+    <p class="why">[What you gain, in one line.] [What you give up, in one line.]</p>
+    <figure class="shot" id="ph-opt-b" data-screen="Option B · [name]">
+      <div class="ios-phone grouped">
+        <div class="ios-status"><span>9:41</span><span class="r"><i class="bars"></i><i class="batt"></i></span></div>
+        <div class="ios-island"></div>
+        <div class="ios-edge"></div>
+        <div class="ios-nav"><div class="right"><span class="ios-btn circle ios-glass"><span class="ios-ico">+</span></span></div></div>
+        <div class="ios-scroll below-nav has-tabbar">
+          <div class="ios-largetitle"><h1>[Title]</h1></div>
+          <div class="ios-section-h">[Section]</div>
+          <div class="ios-list">
+            <div class="ios-row icon"><span class="ios-thumb"></span><div class="t"><b class="hl">[Item]</b><i>[Detail]</i></div><span class="chev"></span></div>
+            <div class="ios-row icon"><span class="ios-thumb"></span><div class="t"><b class="hl">[Item]</b><i>[Detail]</i></div><span class="chev"></span></div>
+          </div>
+        </div>
+        <div class="ios-tabwrap"><div class="ios-tabrow"><div class="ios-tabbar ios-glass"><span class="ios-tab on"><span class="g">◼︎</span>[Tab 1]</span><span class="ios-tab"><span class="g">◎</span>[Tab 2]</span></div><span class="ios-tabsearch ios-glass">⌕</span></div></div>
+        <div class="ios-home"></div>
+      </div>
+    </figure>
+  </article>
+
+  <!-- OPTION C (optional: delete the whole <article> if there are only two) -->
+  <article class="option" id="opt-c">
+    <span class="letter">C</span>
+    <h3>[Short name C]</h3>
+    <p class="why">[What you gain, in one line.] [What you give up, in one line.]</p>
+    <figure class="shot" id="ph-opt-c" data-screen="Option C · [name]">
+      <div class="ios-phone grouped">
+        <div class="ios-status"><span>9:41</span><span class="r"><i class="bars"></i><i class="batt"></i></span></div>
+        <div class="ios-island"></div>
+        <div class="ios-edge"></div>
+        <div class="ios-nav"><div class="right"><span class="ios-btn circle ios-glass"><span class="ios-ico">+</span></span></div></div>
+        <div class="ios-scroll below-nav">
+          <div class="ios-largetitle"><h1>[Title]</h1></div>
+          <div class="ios-section-h">[Section]</div>
+          <div class="ios-list">
+            <div class="ios-row icon"><span class="ios-thumb"></span><div class="t"><b class="hl">[Item]</b><i>[Detail]</i></div><span class="chev"></span></div>
+            <div class="ios-row icon"><span class="ios-thumb"></span><div class="t"><b class="hl">[Item]</b><i>[Detail]</i></div><span class="chev"></span></div>
+          </div>
+        </div>
+        <div class="ios-toolbar"><span class="ios-search ios-glass">⌕ Search</span></div>
+        <div class="ios-home"></div>
+      </div>
+    </figure>
+  </article>
+
+</section>
+
+<!-- HOW TO CHOOSE: why the recommended one, in one line, + how to answer. -->
+<p class="how-to-choose"><b>We recommend B</b> because [one line, in plain words]. Reply in the chat with <b>A</b>, <b>B</b> or <b>C</b>, or tap <b>Annotate</b> (bottom right) to comment on any part of any option, then tap <b>Finish</b> and paste here what was copied.</p>
+
+</main>
+<script src="annotate.js"></script>
+</body>
+</html>

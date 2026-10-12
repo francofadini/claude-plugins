@@ -1,0 +1,3 @@
+# Forbidden copy for this app: one entry per line. Plain text or regex; optional replacement after " => ".
+# Example:
+# oops => something went wrong
