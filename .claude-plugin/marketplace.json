@@ -1,0 +1,12 @@
+{
+  "name": "francofadini",
+  "description": "Plugins de Claude Code de Franco, reutilizables entre proyectos",
+  "owner": { "name": "Franco Fadini" },
+  "plugins": [
+    {
+      "name": "secrets",
+      "source": "./plugins/secrets",
+      "description": "Secretos con dotenvx: el agente los usa y los escribe sin leerlos nunca; hooks que bloquean exponerlos en el chat"
+    }
+  ]
+}
