@@ -52,10 +52,19 @@ if echo "$CMD" | grep -qE 'dotenvx[[:space:]]+run[^|]*--[[:space:]]+env([[:space
   exit 2
 fi
 
-# --- 6. cat/head/tail sobre .env* ---
+# --- 6. cat/head/tail sobre .env* (templates y escrituras con `cat >` se permiten) ---
 if echo "$CMD" | grep -qE '(cat|head|tail|less|more|awk|sed|grep)[[:space:]][^|&;]*\.env(\.[^[:space:]|&;]*)?(\.decrypt)?([[:space:]]|$|\||;|&)'; then
-  echo "BLOQUEADO: no leer archivos .env con cat/head/grep/etc — exponen credenciales al chat. Usá 'dotenvx get NOMBRE_VAR -f .claude/.env'." >&2
-  exit 2
+  READS_SECRET=0
+  for tok in $(echo "$CMD" | grep -oE '[^[:space:]|&;<>"'"'"']*\.env(\.[A-Za-z0-9_.-]+)?'); do
+    [[ "$tok" =~ \.env\.(example|sample|template|dist|defaults)$ ]] && continue
+    # `cat > file` / `cat >> file` writes, it does not read.
+    echo "$CMD" | grep -qE "cat[[:space:]]*>>?[[:space:]]*$tok" && continue
+    READS_SECRET=1
+  done
+  if [[ $READS_SECRET -eq 1 ]]; then
+    echo "BLOQUEADO: no leer archivos .env con cat/head/grep/etc — exponen credenciales al chat. Usá 'dotenvx get NOMBRE_VAR -f .claude/.env'." >&2
+    exit 2
+  fi
 fi
 
 # --- 7. echo/printf de variables que parecen credenciales ---
