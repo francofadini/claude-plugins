@@ -12,6 +12,7 @@
 set -euo pipefail
 
 default_file() { echo "${CLAUDE_PROJECT_DIR:-$PWD}/.claude/.env"; }
+keys_of() { echo "$(dirname "$1")/.env.keys"; }  # la llave va junto al archivo; sin -fk, dotenvx la busca en la carpeta actual
 die() { echo "secrets: $*" >&2; exit 1; }
 command -v dotenvx >/dev/null || die "falta dotenvx (brew install dotenvx/brew/dotenvx)"
 
@@ -31,7 +32,7 @@ case "$cmd" in
     file="${1:-$(default_file)}"
     mkdir -p "$(dirname "$file")"
     [[ -f "$file" ]] || printf '# Secretos encriptados con dotenvx. Se escriben con secrets.sh set.\n' > "$file"
-    dotenvx encrypt -f "$file" >/dev/null
+    dotenvx encrypt -f "$file" -fk "$(keys_of "$file")" >/dev/null
     ensure_gitignore "$file"
     echo "listo: $file (encriptado; la key en $(dirname "$file")/.env.keys, ignorada por git)"
     ;;
@@ -41,7 +42,7 @@ case "$cmd" in
     value="$(pbpaste)"
     [[ -n "$value" ]] || die "el portapapeles está vacío: copiá el valor y volvé a correr"
     [[ -f "$file" ]] || "$0" init "$file" >/dev/null
-    dotenvx set "$name" -f "$file" -- "$value" >/dev/null
+    dotenvx set "$name" -f "$file" -fk "$(keys_of "$file")" -- "$value" >/dev/null
     printf '' | pbcopy
     echo "$name guardado encriptado en $file (portapapeles vaciado)"
     ;;
@@ -51,14 +52,14 @@ case "$cmd" in
     ;;
   has)
     name="${1:-}"; file="${2:-$(default_file)}"
-    [[ -n "$(dotenvx get "$name" -f "$file" 2>/dev/null)" ]]
+    [[ -n "$(dotenvx get "$name" -f "$file" -fk "$(keys_of "$file")" 2>/dev/null)" ]]
     ;;
   run)
     file="$(default_file)"
     if [[ "${1:-}" != "--" ]]; then file="$1"; shift; fi
     [[ "${1:-}" == "--" ]] && shift
     [[ $# -gt 0 ]] || die "uso: secrets.sh run [archivo] -- comando"
-    exec dotenvx run -q -f "$file" -- "$@"
+    exec dotenvx run -q -f "$file" -fk "$(keys_of "$file")" -- "$@"
     ;;
   *) sed -n '2,10p' "$0"; exit 1 ;;
 esac

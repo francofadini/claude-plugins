@@ -18,7 +18,7 @@ El valor de un secreto **nunca** pasa por el chat: no se imprime, no se lee el a
 3. Si el usuario igual lo pegó en el chat, avisale que conviene rotarlo.
 
 ## Usar un secreto
-- En un comando, asignado sin imprimir: `TOKEN=$(dotenvx get RAILWAY_TOKEN -f .claude/.env) && railway ... --token "$TOKEN"`
+- En un comando, asignado sin imprimir: `TOKEN=$(dotenvx get RAILWAY_TOKEN -f .claude/.env -fk .claude/.env.keys) && railway ... --token "$TOKEN"`
 - Para correr algo con todo cargado: `secrets.sh run [archivo] -- pnpm dev`
 - ¿Existe?: `secrets.sh has NOMBRE [archivo]`
 - ¿Qué hay?: `secrets.sh names [archivo]` (solo nombres)
